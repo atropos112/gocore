@@ -1,0 +1,1309 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Utils/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Vikunja - GoCore</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.bcfcd587.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#vikunja" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="GoCore" class="md-header__button md-logo" aria-label="GoCore" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GoCore
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Vikunja
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="GoCore" class="md-nav__button md-logo" aria-label="GoCore" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    GoCore
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Vikunja
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Vikunja
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#func-consumewebhookcallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      func ConsumeWebhookCallback
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#func-registervikunjawebhookhandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      func RegisterVikunjaWebhookHandler
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      type Client
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="type Client">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#func-getvikunjaapiclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      func GetVikunjaAPIClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-addlabeltotask" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) AddLabelToTask
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-createprojectwebhook" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) CreateProjectWebhook
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-deleteprojectwebhook" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) DeleteProjectWebhook
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-getalllabels" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) GetAllLabels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-getproject" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) GetProject
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-getprojecttasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) GetProjectTasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-getprojectwebhooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) GetProjectWebhooks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-getprojects" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) GetProjects
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-gettask" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) GetTask
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-gettaskcomments" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) GetTaskComments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-getusersonaproject" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) GetUsersOnAProject
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-updateproject" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) UpdateProject
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-updateprojectwebhook" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) UpdateProjectWebhook
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-updatetask" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) UpdateTask
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-comment" class="md-nav__link">
+    <span class="md-ellipsis">
+      type Comment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="type Comment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#func-getlatestcomment" class="md-nav__link">
+    <span class="md-ellipsis">
+      func GetLatestComment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      type Label
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="type Label">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#func-labelswithgiventitles" class="md-nav__link">
+    <span class="md-ellipsis">
+      func LabelsWithGivenTitles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-labelid" class="md-nav__link">
+    <span class="md-ellipsis">
+      type LabelID
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      type Project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      type Task
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      type User
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-vikunjawebhookeventtype" class="md-nav__link">
+    <span class="md-ellipsis">
+      type VikunjaWebhookEventType
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-webhook" class="md-nav__link">
+    <span class="md-ellipsis">
+      type Webhook
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-webhookcallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      type WebhookCallback
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-webhookcallbackdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      type WebhookCallbackData
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#func-consumewebhookcallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      func ConsumeWebhookCallback
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#func-registervikunjawebhookhandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      func RegisterVikunjaWebhookHandler
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      type Client
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="type Client">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#func-getvikunjaapiclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      func GetVikunjaAPIClient
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-addlabeltotask" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) AddLabelToTask
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-createprojectwebhook" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) CreateProjectWebhook
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-deleteprojectwebhook" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) DeleteProjectWebhook
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-getalllabels" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) GetAllLabels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-getproject" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) GetProject
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-getprojecttasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) GetProjectTasks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-getprojectwebhooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) GetProjectWebhooks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-getprojects" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) GetProjects
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-gettask" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) GetTask
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-gettaskcomments" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) GetTaskComments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-getusersonaproject" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) GetUsersOnAProject
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-updateproject" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) UpdateProject
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-updateprojectwebhook" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) UpdateProjectWebhook
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#func-client-updatetask" class="md-nav__link">
+    <span class="md-ellipsis">
+      func (*Client) UpdateTask
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-comment" class="md-nav__link">
+    <span class="md-ellipsis">
+      type Comment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="type Comment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#func-getlatestcomment" class="md-nav__link">
+    <span class="md-ellipsis">
+      func GetLatestComment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      type Label
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="type Label">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#func-labelswithgiventitles" class="md-nav__link">
+    <span class="md-ellipsis">
+      func LabelsWithGivenTitles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-labelid" class="md-nav__link">
+    <span class="md-ellipsis">
+      type LabelID
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      type Project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      type Task
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      type User
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-vikunjawebhookeventtype" class="md-nav__link">
+    <span class="md-ellipsis">
+      type VikunjaWebhookEventType
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-webhook" class="md-nav__link">
+    <span class="md-ellipsis">
+      type Webhook
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-webhookcallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      type WebhookCallback
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-webhookcallbackdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      type WebhookCallbackData
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<!-- Code generated by gomarkdoc. DO NOT EDIT -->
+
+<h1 id="vikunja">vikunja</h1>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/atropos112/gocore/vikunja&quot;</span>
+</span></code></pre></div>
+<h2 id="index">Index</h2>
+<ul>
+<li><a href="#ConsumeWebhookCallback">func ConsumeWebhookCallback(body io.ReadCloser, callback func(webhook WebhookCallback) error) error</a></li>
+<li><a href="#RegisterVikunjaWebhookHandler">func RegisterVikunjaWebhookHandler(path string, callback func(Webhook WebhookCallback, c *Client) error) error</a></li>
+<li><a href="#Client">type Client</a></li>
+<li><a href="#GetVikunjaAPIClient">func GetVikunjaAPIClient(token, apiURL string) (*Client, error)</a></li>
+<li><a href="#Client.AddLabelToTask">func (c *Client) AddLabelToTask(taskID, labelID int) (LabelID, error)</a></li>
+<li><a href="#Client.CreateProjectWebhook">func (c *Client) CreateProjectWebhook(projectID int, webhook Webhook) (Webhook, error)</a></li>
+<li><a href="#Client.DeleteProjectWebhook">func (c *Client) DeleteProjectWebhook(projectID, webhookID int) (Webhook, error)</a></li>
+<li><a href="#Client.GetAllLabels">func (c *Client) GetAllLabels() ([]Label, error)</a></li>
+<li><a href="#Client.GetProject">func (c *Client) GetProject(projectID int) (Project, error)</a></li>
+<li><a href="#Client.GetProjectTasks">func (c *Client) GetProjectTasks(projectID int) ([]Task, error)</a></li>
+<li><a href="#Client.GetProjectWebhooks">func (c *Client) GetProjectWebhooks(projectID int) ([]Webhook, error)</a></li>
+<li><a href="#Client.GetProjects">func (c *Client) GetProjects() ([]Project, error)</a></li>
+<li><a href="#Client.GetTask">func (c *Client) GetTask(taskID int) (Task, error)</a></li>
+<li><a href="#Client.GetTaskComments">func (c *Client) GetTaskComments(taskID int) ([]Comment, error)</a></li>
+<li><a href="#Client.GetUsersOnAProject">func (c *Client) GetUsersOnAProject(projectID int) ([]User, error)</a></li>
+<li><a href="#Client.UpdateProject">func (c *Client) UpdateProject(project Project) (Project, error)</a></li>
+<li><a href="#Client.UpdateProjectWebhook">func (c *Client) UpdateProjectWebhook(projectID int, webhook Webhook) (Webhook, error)</a></li>
+<li><a href="#Client.UpdateTask">func (c *Client) UpdateTask(task Task) (Task, error)</a></li>
+<li><a href="#Comment">type Comment</a></li>
+<li><a href="#GetLatestComment">func GetLatestComment(comments []Comment) (Comment, error)</a></li>
+<li><a href="#Label">type Label</a></li>
+<li><a href="#LabelsWithGivenTitles">func LabelsWithGivenTitles(labels []Label, titles []string) ([]Label, error)</a></li>
+<li><a href="#LabelID">type LabelID</a></li>
+<li><a href="#Project">type Project</a></li>
+<li><a href="#Task">type Task</a></li>
+<li><a href="#User">type User</a></li>
+<li><a href="#VikunjaWebhookEventType">type VikunjaWebhookEventType</a></li>
+<li><a href="#Webhook">type Webhook</a></li>
+<li><a href="#WebhookCallback">type WebhookCallback</a></li>
+<li><a href="#WebhookCallbackData">type WebhookCallbackData</a></li>
+</ul>
+<p><a name="ConsumeWebhookCallback"></a></p>
+<h2 id="func-consumewebhookcallback">func ConsumeWebhookCallback</h2>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">func</span><span class="w"> </span><span class="nx">ConsumeWebhookCallback</span><span class="p">(</span><span class="nx">body</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadCloser</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">webhook</span><span class="w"> </span><span class="nx">WebhookCallback</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span>
+</span></code></pre></div>
+<p>ConsumeWebhookCallback consumes a webhook callback and calls the callback function</p>
+<p><a name="RegisterVikunjaWebhookHandler"></a></p>
+<h2 id="func-registervikunjawebhookhandler">func RegisterVikunjaWebhookHandler</h2>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">func</span><span class="w"> </span><span class="nx">RegisterVikunjaWebhookHandler</span><span class="p">(</span><span class="nx">path</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">Webhook</span><span class="w"> </span><span class="nx">WebhookCallback</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Client</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span>
+</span></code></pre></div>
+<p>RegisterVikunjaWebhookHandler registers a webhook handler for Vikunja Webhook</p>
+<p>Typical usage is something like: l := utils.GetInitLogger()</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>if err := vikunja.RegisterVikunjaWebhookHandler(&quot;/&quot;, SomeWebhookHandler); err != nil {
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    log.Fatal(err)
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>}
+</span></code></pre></div>
+<p>utils.RunAPIServer(8080)</p>
+<p><a name="Client"></a></p>
+<h2 id="type-client">type Client</h2>
+<p>Client is the interface for the Vikunja API client</p>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">Client</span><span class="w"> </span><span class="nx">utils</span><span class="p">.</span><span class="nx">AuthenticatedAPIClient</span>
+</span></code></pre></div>
+<p><a name="GetVikunjaAPIClient"></a></p>
+<h3 id="func-getvikunjaapiclient">func GetVikunjaAPIClient</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">func</span><span class="w"> </span><span class="nx">GetVikunjaAPIClient</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">apiURL</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">Client</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>GetVikunjaAPIClient returns a new Vikunja API client</p>
+<p><a name="Client.AddLabelToTask"></a></p>
+<h3 id="func-client-addlabeltotask">func (*Client) AddLabelToTask</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Client</span><span class="p">)</span><span class="w"> </span><span class="nx">AddLabelToTask</span><span class="p">(</span><span class="nx">taskID</span><span class="p">,</span><span class="w"> </span><span class="nx">labelID</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">LabelID</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>AddLabelToTask adds a label to a task</p>
+<p><a name="Client.CreateProjectWebhook"></a></p>
+<h3 id="func-client-createprojectwebhook">func (*Client) CreateProjectWebhook</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Client</span><span class="p">)</span><span class="w"> </span><span class="nx">CreateProjectWebhook</span><span class="p">(</span><span class="nx">projectID</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">webhook</span><span class="w"> </span><span class="nx">Webhook</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">Webhook</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>CreateProjectWebhook creates a webhook for a project</p>
+<p><a name="Client.DeleteProjectWebhook"></a></p>
+<h3 id="func-client-deleteprojectwebhook">func (*Client) DeleteProjectWebhook</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Client</span><span class="p">)</span><span class="w"> </span><span class="nx">DeleteProjectWebhook</span><span class="p">(</span><span class="nx">projectID</span><span class="p">,</span><span class="w"> </span><span class="nx">webhookID</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">Webhook</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>DeleteProjectWebhook deletes a webhook for a project</p>
+<p><a name="Client.GetAllLabels"></a></p>
+<h3 id="func-client-getalllabels">func (*Client) GetAllLabels</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Client</span><span class="p">)</span><span class="w"> </span><span class="nx">GetAllLabels</span><span class="p">()</span><span class="w"> </span><span class="p">([]</span><span class="nx">Label</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>GetAllLabels returns a list of labels for a task</p>
+<p><a name="Client.GetProject"></a></p>
+<h3 id="func-client-getproject">func (*Client) GetProject</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Client</span><span class="p">)</span><span class="w"> </span><span class="nx">GetProject</span><span class="p">(</span><span class="nx">projectID</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">Project</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>GetProject returns a specific project</p>
+<p><a name="Client.GetProjectTasks"></a></p>
+<h3 id="func-client-getprojecttasks">func (*Client) GetProjectTasks</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Client</span><span class="p">)</span><span class="w"> </span><span class="nx">GetProjectTasks</span><span class="p">(</span><span class="nx">projectID</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">([]</span><span class="nx">Task</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>GetProjectTasks returns a list of tasks for a project</p>
+<p><a name="Client.GetProjectWebhooks"></a></p>
+<h3 id="func-client-getprojectwebhooks">func (*Client) GetProjectWebhooks</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Client</span><span class="p">)</span><span class="w"> </span><span class="nx">GetProjectWebhooks</span><span class="p">(</span><span class="nx">projectID</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">([]</span><span class="nx">Webhook</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>GetProjectWebhooks returns a list of webhooks for a project</p>
+<p><a name="Client.GetProjects"></a></p>
+<h3 id="func-client-getprojects">func (*Client) GetProjects</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Client</span><span class="p">)</span><span class="w"> </span><span class="nx">GetProjects</span><span class="p">()</span><span class="w"> </span><span class="p">([]</span><span class="nx">Project</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>GetProjects returns a list of projects</p>
+<p><a name="Client.GetTask"></a></p>
+<h3 id="func-client-gettask">func (*Client) GetTask</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Client</span><span class="p">)</span><span class="w"> </span><span class="nx">GetTask</span><span class="p">(</span><span class="nx">taskID</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">Task</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>GetTask returns a task</p>
+<p><a name="Client.GetTaskComments"></a></p>
+<h3 id="func-client-gettaskcomments">func (*Client) GetTaskComments</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Client</span><span class="p">)</span><span class="w"> </span><span class="nx">GetTaskComments</span><span class="p">(</span><span class="nx">taskID</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">([]</span><span class="nx">Comment</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>GetTaskComments returns a list of comments for a task</p>
+<p><a name="Client.GetUsersOnAProject"></a></p>
+<h3 id="func-client-getusersonaproject">func (*Client) GetUsersOnAProject</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Client</span><span class="p">)</span><span class="w"> </span><span class="nx">GetUsersOnAProject</span><span class="p">(</span><span class="nx">projectID</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">([]</span><span class="nx">User</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>GetUsersOnAProject returns a list of users added to a project</p>
+<p><a name="Client.UpdateProject"></a></p>
+<h3 id="func-client-updateproject">func (*Client) UpdateProject</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Client</span><span class="p">)</span><span class="w"> </span><span class="nx">UpdateProject</span><span class="p">(</span><span class="nx">project</span><span class="w"> </span><span class="nx">Project</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">Project</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>UpdateProject updates a project</p>
+<p><a name="Client.UpdateProjectWebhook"></a></p>
+<h3 id="func-client-updateprojectwebhook">func (*Client) UpdateProjectWebhook</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Client</span><span class="p">)</span><span class="w"> </span><span class="nx">UpdateProjectWebhook</span><span class="p">(</span><span class="nx">projectID</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">webhook</span><span class="w"> </span><span class="nx">Webhook</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">Webhook</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>UpdateProjectWebhook updates a webhook for a project, only can update events (nothing else)</p>
+<p><a name="Client.UpdateTask"></a></p>
+<h3 id="func-client-updatetask">func (*Client) UpdateTask</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Client</span><span class="p">)</span><span class="w"> </span><span class="nx">UpdateTask</span><span class="p">(</span><span class="nx">task</span><span class="w"> </span><span class="nx">Task</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">Task</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>UpdateTask updates a task</p>
+<p><a name="Comment"></a></p>
+<h2 id="type-comment">type Comment</h2>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">Comment</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">    </span><span class="nx">ID</span><span class="w">      </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;id&quot;`</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span><span class="nx">Comment</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;comment&quot;`</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">    </span><span class="nx">Author</span><span class="w">  </span><span class="nx">User</span><span class="w">   </span><span class="s">`json:&quot;author&quot;`</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">    </span><span class="nx">Created</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;created&quot;`</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">    </span><span class="nx">Updated</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;updated&quot;`</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><a name="GetLatestComment"></a></p>
+<h3 id="func-getlatestcomment">func GetLatestComment</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kd">func</span><span class="w"> </span><span class="nx">GetLatestComment</span><span class="p">(</span><span class="nx">comments</span><span class="w"> </span><span class="p">[]</span><span class="nx">Comment</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">Comment</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>GetLatestComment returns the latest comment from a list of comments</p>
+<p><a name="Label"></a></p>
+<h2 id="type-label">type Label</h2>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">Label</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="nx">ID</span><span class="w">          </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;id&quot;`</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">    </span><span class="nx">Title</span><span class="w">       </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;title&quot;`</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">    </span><span class="nx">Description</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;description&quot;`</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">    </span><span class="nx">HexColor</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;hex_color&quot;`</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">    </span><span class="nx">CreatedBy</span><span class="w">   </span><span class="nx">User</span><span class="w">   </span><span class="s">`json:&quot;created_by&quot;`</span>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">    </span><span class="nx">Created</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;created&quot;`</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="w">    </span><span class="nx">Updated</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;updated&quot;`</span>
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><a name="LabelsWithGivenTitles"></a></p>
+<h3 id="func-labelswithgiventitles">func LabelsWithGivenTitles</h3>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kd">func</span><span class="w"> </span><span class="nx">LabelsWithGivenTitles</span><span class="p">(</span><span class="nx">labels</span><span class="w"> </span><span class="p">[]</span><span class="nx">Label</span><span class="p">,</span><span class="w"> </span><span class="nx">titles</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">([]</span><span class="nx">Label</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</span></code></pre></div>
+<p>LabelsWithGivenTitles returns a list of labels with the given titles If the title of a label is not found, an error is returned, it is expected that you only provide valid titles</p>
+<p><a name="LabelID"></a></p>
+<h2 id="type-labelid">type LabelID</h2>
+<p>LabelID is a struct used to communicate to vikunja which label you are after. It is not the ID field in Label though.</p>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">LabelID</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span><span class="nx">ID</span><span class="w">      </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;label_id&quot;`</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span><span class="nx">Created</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;created,omitempty&quot;`</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><a name="Project"></a></p>
+<h2 id="type-project">type Project</h2>
+<p>Project is a struct that represents a project in Vikunja</p>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">Project</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">    </span><span class="nx">ID</span><span class="w">                    </span><span class="kt">int</span><span class="w">         </span><span class="s">`json:&quot;id&quot;`</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">    </span><span class="nx">Title</span><span class="w">                 </span><span class="kt">string</span><span class="w">      </span><span class="s">`json:&quot;title&quot;`</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">    </span><span class="nx">HexColor</span><span class="w">              </span><span class="kt">string</span><span class="w">      </span><span class="s">`json:&quot;hex_color&quot;`</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">    </span><span class="nx">BackgroundBlurHash</span><span class="w">    </span><span class="kt">string</span><span class="w">      </span><span class="s">`json:&quot;background_blur_hash&quot;`</span>
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">    </span><span class="nx">Position</span><span class="w">              </span><span class="kt">float64</span><span class="w">     </span><span class="s">`json:&quot;position&quot;`</span>
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">    </span><span class="nx">Created</span><span class="w">               </span><span class="kt">string</span><span class="w">      </span><span class="s">`json:&quot;created&quot;`</span>
+</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="w">    </span><span class="nx">Updated</span><span class="w">               </span><span class="kt">string</span><span class="w">      </span><span class="s">`json:&quot;updated&quot;`</span>
+</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="w">    </span><span class="nx">Description</span><span class="w">           </span><span class="kt">string</span><span class="w">      </span><span class="s">`json:&quot;description&quot;`</span>
+</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="w">    </span><span class="nx">DefaultBucketID</span><span class="w">       </span><span class="kt">int</span><span class="w">         </span><span class="s">`json:&quot;default_bucket_id&quot;`</span>
+</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="w">    </span><span class="nx">DoneBucketID</span><span class="w">          </span><span class="kt">int</span><span class="w">         </span><span class="s">`json:&quot;done_bucket_id&quot;`</span>
+</span><span id="__span-25-12"><a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a><span class="w">    </span><span class="nx">Identifier</span><span class="w">            </span><span class="kt">string</span><span class="w">      </span><span class="s">`json:&quot;identifier&quot;`</span>
+</span><span id="__span-25-13"><a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a><span class="w">    </span><span class="nx">IsArchived</span><span class="w">            </span><span class="kt">bool</span><span class="w">        </span><span class="s">`json:&quot;is_archived&quot;`</span>
+</span><span id="__span-25-14"><a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a><span class="w">    </span><span class="nx">IsFavorite</span><span class="w">            </span><span class="kt">bool</span><span class="w">        </span><span class="s">`json:&quot;is_favorite&quot;`</span>
+</span><span id="__span-25-15"><a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a><span class="w">    </span><span class="nx">Owner</span><span class="w">                 </span><span class="nx">User</span><span class="w">        </span><span class="s">`json:&quot;owner&quot;`</span>
+</span><span id="__span-25-16"><a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a><span class="w">    </span><span class="nx">ParentProjectID</span><span class="w">       </span><span class="kt">int</span><span class="w">         </span><span class="s">`json:&quot;parent_project_id&quot;`</span>
+</span><span id="__span-25-17"><a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a><span class="w">    </span><span class="nx">BackgroundInformation</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span><span class="w"> </span><span class="s">`json:&quot;background_information&quot;`</span>
+</span><span id="__span-25-18"><a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><a name="Task"></a></p>
+<h2 id="type-task">type Task</h2>
+<p>Task represents a task in Vikunja</p>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">Task</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span><span class="nx">ID</span><span class="w">                     </span><span class="kt">int</span><span class="w">                      </span><span class="s">`json:&quot;id&quot;`</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">    </span><span class="nx">Title</span><span class="w">                  </span><span class="kt">string</span><span class="w">                   </span><span class="s">`json:&quot;title&quot;`</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">    </span><span class="nx">Description</span><span class="w">            </span><span class="kt">string</span><span class="w">                   </span><span class="s">`json:&quot;description&quot;`</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">    </span><span class="nx">Done</span><span class="w">                   </span><span class="kt">bool</span><span class="w">                     </span><span class="s">`json:&quot;done&quot;`</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="w">    </span><span class="nx">DoneAt</span><span class="w">                 </span><span class="kt">string</span><span class="w">                   </span><span class="s">`json:&quot;done_at&quot;`</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">    </span><span class="nx">DueDate</span><span class="w">                </span><span class="kt">string</span><span class="w">                   </span><span class="s">`json:&quot;due_date&quot;`</span>
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="w">    </span><span class="nx">Reminders</span><span class="w">              </span><span class="kd">interface</span><span class="p">{}</span><span class="w">              </span><span class="s">`json:&quot;reminders&quot;`</span>
+</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="w">    </span><span class="nx">ProjectID</span><span class="w">              </span><span class="kt">int</span><span class="w">                      </span><span class="s">`json:&quot;project_id&quot;`</span>
+</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="w">    </span><span class="nx">RepeatAfter</span><span class="w">            </span><span class="kt">int</span><span class="w">                      </span><span class="s">`json:&quot;repeat_after&quot;`</span>
+</span><span id="__span-26-11"><a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="w">    </span><span class="nx">RepeatMode</span><span class="w">             </span><span class="kt">int</span><span class="w">                      </span><span class="s">`json:&quot;repeat_mode&quot;`</span>
+</span><span id="__span-26-12"><a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="w">    </span><span class="nx">Priority</span><span class="w">               </span><span class="kt">int</span><span class="w">                      </span><span class="s">`json:&quot;priority&quot;`</span>
+</span><span id="__span-26-13"><a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a><span class="w">    </span><span class="nx">StartDate</span><span class="w">              </span><span class="kt">string</span><span class="w">                   </span><span class="s">`json:&quot;start_date&quot;`</span>
+</span><span id="__span-26-14"><a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a><span class="w">    </span><span class="nx">EndDate</span><span class="w">                </span><span class="kt">string</span><span class="w">                   </span><span class="s">`json:&quot;end_date&quot;`</span>
+</span><span id="__span-26-15"><a id="__codelineno-26-15" name="__codelineno-26-15" href="#__codelineno-26-15"></a><span class="w">    </span><span class="nx">Assignees</span><span class="w">              </span><span class="p">[]</span><span class="nx">User</span><span class="w">                   </span><span class="s">`json:&quot;assignees&quot;`</span>
+</span><span id="__span-26-16"><a id="__codelineno-26-16" name="__codelineno-26-16" href="#__codelineno-26-16"></a><span class="w">    </span><span class="nx">Labels</span><span class="w">                 </span><span class="p">[]</span><span class="nx">Label</span><span class="w">                  </span><span class="s">`json:&quot;labels&quot;`</span>
+</span><span id="__span-26-17"><a id="__codelineno-26-17" name="__codelineno-26-17" href="#__codelineno-26-17"></a><span class="w">    </span><span class="nx">HexColor</span><span class="w">               </span><span class="kt">string</span><span class="w">                   </span><span class="s">`json:&quot;hex_color&quot;`</span>
+</span><span id="__span-26-18"><a id="__codelineno-26-18" name="__codelineno-26-18" href="#__codelineno-26-18"></a><span class="w">    </span><span class="nx">PercentDone</span><span class="w">            </span><span class="kt">int</span><span class="w">                      </span><span class="s">`json:&quot;percent_done&quot;`</span>
+</span><span id="__span-26-19"><a id="__codelineno-26-19" name="__codelineno-26-19" href="#__codelineno-26-19"></a><span class="w">    </span><span class="nx">Identifier</span><span class="w">             </span><span class="kt">string</span><span class="w">                   </span><span class="s">`json:&quot;identifier&quot;`</span>
+</span><span id="__span-26-20"><a id="__codelineno-26-20" name="__codelineno-26-20" href="#__codelineno-26-20"></a><span class="w">    </span><span class="nx">Index</span><span class="w">                  </span><span class="kt">int</span><span class="w">                      </span><span class="s">`json:&quot;index&quot;`</span>
+</span><span id="__span-26-21"><a id="__codelineno-26-21" name="__codelineno-26-21" href="#__codelineno-26-21"></a><span class="w">    </span><span class="nx">RelatedTasks</span><span class="w">           </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">][]</span><span class="kd">interface</span><span class="p">{}</span><span class="w"> </span><span class="s">`json:&quot;related_tasks,omitempty&quot;`</span><span class="w"> </span><span class="c1">// Marking this with []Task instead of interface{} causes parsing errors...</span>
+</span><span id="__span-26-22"><a id="__codelineno-26-22" name="__codelineno-26-22" href="#__codelineno-26-22"></a><span class="w">    </span><span class="nx">Attachments</span><span class="w">            </span><span class="kd">interface</span><span class="p">{}</span><span class="w">              </span><span class="s">`json:&quot;attachments&quot;`</span>
+</span><span id="__span-26-23"><a id="__codelineno-26-23" name="__codelineno-26-23" href="#__codelineno-26-23"></a><span class="w">    </span><span class="nx">CoverImageAttachmentID</span><span class="w"> </span><span class="kt">int</span><span class="w">                      </span><span class="s">`json:&quot;cover_image_attachment_id&quot;`</span>
+</span><span id="__span-26-24"><a id="__codelineno-26-24" name="__codelineno-26-24" href="#__codelineno-26-24"></a><span class="w">    </span><span class="nx">IsFavorite</span><span class="w">             </span><span class="kt">bool</span><span class="w">                     </span><span class="s">`json:&quot;is_favorite&quot;`</span>
+</span><span id="__span-26-25"><a id="__codelineno-26-25" name="__codelineno-26-25" href="#__codelineno-26-25"></a><span class="w">    </span><span class="nx">Created</span><span class="w">                </span><span class="kt">string</span><span class="w">                   </span><span class="s">`json:&quot;created&quot;`</span>
+</span><span id="__span-26-26"><a id="__codelineno-26-26" name="__codelineno-26-26" href="#__codelineno-26-26"></a><span class="w">    </span><span class="nx">Updated</span><span class="w">                </span><span class="kt">string</span><span class="w">                   </span><span class="s">`json:&quot;updated&quot;`</span>
+</span><span id="__span-26-27"><a id="__codelineno-26-27" name="__codelineno-26-27" href="#__codelineno-26-27"></a><span class="w">    </span><span class="nx">BucketID</span><span class="w">               </span><span class="kt">int</span><span class="w">                      </span><span class="s">`json:&quot;bucket_id&quot;`</span>
+</span><span id="__span-26-28"><a id="__codelineno-26-28" name="__codelineno-26-28" href="#__codelineno-26-28"></a><span class="w">    </span><span class="nx">Position</span><span class="w">               </span><span class="kt">float64</span><span class="w">                  </span><span class="s">`json:&quot;position&quot;`</span>
+</span><span id="__span-26-29"><a id="__codelineno-26-29" name="__codelineno-26-29" href="#__codelineno-26-29"></a><span class="w">    </span><span class="nx">KanbanPosition</span><span class="w">         </span><span class="kt">float64</span><span class="w">                  </span><span class="s">`json:&quot;kanban_position&quot;`</span>
+</span><span id="__span-26-30"><a id="__codelineno-26-30" name="__codelineno-26-30" href="#__codelineno-26-30"></a><span class="w">    </span><span class="nx">CreatedBy</span><span class="w">              </span><span class="nx">User</span><span class="w">                     </span><span class="s">`json:&quot;created_by&quot;`</span>
+</span><span id="__span-26-31"><a id="__codelineno-26-31" name="__codelineno-26-31" href="#__codelineno-26-31"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><a name="User"></a></p>
+<h2 id="type-user">type User</h2>
+<p>User is a struct that represents a user in Vikunja</p>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span><span class="nx">ID</span><span class="w">       </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;id&quot;`</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">    </span><span class="nx">Name</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">    </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;username&quot;`</span>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w">    </span><span class="nx">Created</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;created&quot;`</span>
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="w">    </span><span class="nx">Updated</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;updated&quot;`</span>
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><a name="VikunjaWebhookEventType"></a></p>
+<h2 id="type-vikunjawebhookeventtype">type VikunjaWebhookEventType</h2>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="kt">string</span>
+</span></code></pre></div>
+<p><a name="ProjectDeleted"></a></p>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">    </span><span class="nx">ProjectDeleted</span><span class="w">        </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;project.deleted&quot;</span>
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">    </span><span class="nx">TaskAssigneeCreated</span><span class="w">   </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;task.assignee.created&quot;</span>
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">    </span><span class="nx">TaskCommentCreated</span><span class="w">    </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;task.comment.created&quot;</span>
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="w">    </span><span class="nx">TaskDeleted</span><span class="w">           </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;task.deleted&quot;</span>
+</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="w">    </span><span class="nx">TaskRelationCreated</span><span class="w">   </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;task.relation.created&quot;</span>
+</span><span id="__span-29-7"><a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="w">    </span><span class="nx">TaskCommentDeleted</span><span class="w">    </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;task.comment.deleted&quot;</span>
+</span><span id="__span-29-8"><a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="w">    </span><span class="nx">TaskAssigneeDeleted</span><span class="w">   </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;task.assignee.deleted&quot;</span>
+</span><span id="__span-29-9"><a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="w">    </span><span class="nx">ProjectSharedTeam</span><span class="w">     </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;project.shared.team&quot;</span>
+</span><span id="__span-29-10"><a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a><span class="w">    </span><span class="nx">ProjectSharedUser</span><span class="w">     </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;project.shared.user&quot;</span>
+</span><span id="__span-29-11"><a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="w">    </span><span class="nx">TaskAttachmentCreated</span><span class="w"> </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;task.attachment.created&quot;</span>
+</span><span id="__span-29-12"><a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a><span class="w">    </span><span class="nx">TaskCommentEdited</span><span class="w">     </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;task.comment.edited&quot;</span>
+</span><span id="__span-29-13"><a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a><span class="w">    </span><span class="nx">TaskRelationDeleted</span><span class="w">   </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;task.relation.deleted&quot;</span>
+</span><span id="__span-29-14"><a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a><span class="w">    </span><span class="nx">TaskUpdated</span><span class="w">           </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;task.updated&quot;</span>
+</span><span id="__span-29-15"><a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a><span class="w">    </span><span class="nx">TaskCreated</span><span class="w">           </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;task.created&quot;</span>
+</span><span id="__span-29-16"><a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a><span class="w">    </span><span class="nx">TaskAttachmentDeleted</span><span class="w"> </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;task.attachment.deleted&quot;</span>
+</span><span id="__span-29-17"><a id="__codelineno-29-17" name="__codelineno-29-17" href="#__codelineno-29-17"></a><span class="w">    </span><span class="nx">ProjectUpdated</span><span class="w">        </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;project.updated&quot;</span>
+</span><span id="__span-29-18"><a id="__codelineno-29-18" name="__codelineno-29-18" href="#__codelineno-29-18"></a><span class="p">)</span>
+</span></code></pre></div>
+<p><a name="Webhook"></a></p>
+<h2 id="type-webhook">type Webhook</h2>
+<p>Webhook represents a webhook in Vikunja</p>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">Webhook</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="w">    </span><span class="nx">ID</span><span class="w">        </span><span class="kt">int</span><span class="w">      </span><span class="s">`json:&quot;id&quot;`</span>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="w">    </span><span class="nx">TargetURL</span><span class="w"> </span><span class="kt">string</span><span class="w">   </span><span class="s">`json:&quot;target_url&quot;`</span>
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="w">    </span><span class="nx">Events</span><span class="w">    </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;events&quot;`</span>
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="w">    </span><span class="nx">ProjectID</span><span class="w"> </span><span class="kt">int</span><span class="w">      </span><span class="s">`json:&quot;project_id&quot;`</span>
+</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="w">    </span><span class="nx">Secret</span><span class="w">    </span><span class="o">*</span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;secret,omitempty&quot;`</span>
+</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="w">    </span><span class="nx">Created</span><span class="w">   </span><span class="o">*</span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;created,omitempty&quot;`</span>
+</span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="w">    </span><span class="nx">Updated</span><span class="w">   </span><span class="o">*</span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;updated,omitempty&quot;`</span>
+</span><span id="__span-30-9"><a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="w">    </span><span class="nx">CreatedBy</span><span class="w"> </span><span class="o">*</span><span class="nx">User</span><span class="w">    </span><span class="s">`json:&quot;created_by,omitempty&quot;`</span>
+</span><span id="__span-30-10"><a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><a name="WebhookCallback"></a></p>
+<h2 id="type-webhookcallback">type WebhookCallback</h2>
+<p>WebhookCallback represents a webhook callback</p>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">WebhookCallback</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">    </span><span class="nx">EventName</span><span class="w"> </span><span class="nx">VikunjaWebhookEventType</span><span class="w"> </span><span class="s">`json:&quot;event_name&quot;`</span>
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="nx">Time</span><span class="w">      </span><span class="kt">string</span><span class="w">                  </span><span class="s">`json:&quot;time&quot;`</span>
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">    </span><span class="nx">Data</span><span class="w">      </span><span class="nx">WebhookCallbackData</span><span class="w">     </span><span class="s">`json:&quot;data&quot;`</span>
+</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><a name="WebhookCallbackData"></a></p>
+<h2 id="type-webhookcallbackdata">type WebhookCallbackData</h2>
+<p>WebhookCallbackData represents the data that is sent to a webhook callback</p>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">WebhookCallbackData</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="w">    </span><span class="nx">Doer</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="s">`json:&quot;doer&quot;`</span>
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="w">    </span><span class="nx">Task</span><span class="w"> </span><span class="nx">Task</span><span class="w"> </span><span class="s">`json:&quot;task&quot;`</span>
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Generated by <a href="https://github.com/princjef/gomarkdoc">gomarkdoc</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>
