@@ -11,6 +11,17 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
+const eventExists = `-- name: EventExists :one
+SELECT EXISTS(SELECT 1 FROM events WHERE id = $1)
+`
+
+func (q *Queries) EventExists(ctx context.Context, id string) (bool, error) {
+	row := q.db.QueryRow(ctx, eventExists, id)
+	var exists bool
+	err := row.Scan(&exists)
+	return exists, err
+}
+
 const getEvent = `-- name: GetEvent :one
 SELECT id, source, type, specversion, datacontenttype, data, time, subject FROM events WHERE id = $1
 `

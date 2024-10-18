@@ -323,7 +323,7 @@ type Task struct {
     Assignees              []User                   `json:"assignees"`
     Labels                 []Label                  `json:"labels"`
     HexColor               string                   `json:"hex_color"`
-    PercentDone            int                      `json:"percent_done"`
+    PercentDone            float32                  `json:"percent_done"`
     Identifier             string                   `json:"identifier"`
     Index                  int                      `json:"index"`
     RelatedTasks           map[string][]interface{} `json:"related_tasks,omitempty"` // Marking this with []Task instead of interface{} causes parsing errors...

@@ -6,3 +6,6 @@ SELECT * FROM events WHERE id = $1;
 
 -- name: GetEventsUpTo :many
 SELECT * FROM events WHERE time > $1;
+
+-- name: EventExists :one
+SELECT EXISTS(SELECT 1 FROM events WHERE id = $1);
