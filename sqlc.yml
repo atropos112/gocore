@@ -1,0 +1,11 @@
+---
+version: "2"
+sql:
+  - engine: "postgresql"
+    queries: "events/query.sql"
+    schema: "events/schema.sql"
+    gen:
+      go:
+        package: "events"
+        out: "events"
+        sql_package: "pgx/v5"
