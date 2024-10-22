@@ -16,7 +16,7 @@ func ConsumeWebhookCallback(body io.ReadCloser, callback func(webhook WebhookCal
 	}
 
 	// Figure out if it has body and i need to unpack it or its already unpacked
-	obj := map[string]interface{}(nil)
+	obj := map[string]any(nil)
 	if err := json.Unmarshal(bytes, &obj); err != nil {
 		return err
 	}
