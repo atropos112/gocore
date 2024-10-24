@@ -75,8 +75,8 @@ func (q *Queries) GetEventsUpTo(ctx context.Context, time pgtype.Timestamptz) ([
 	return items, nil
 }
 
-const insertEvent = `-- name: InsertEvent :one
-INSERT INTO events (id, source, type, specversion, datacontenttype, data, time, subject) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) ON CONFLICT(id, time) DO NOTHING RETURNING id, source, type, specversion, datacontenttype, data, time, subject
+const insertEvent = `-- name: InsertEvent :exec
+INSERT INTO events (id, source, type, specversion, datacontenttype, data, time, subject) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) ON CONFLICT(id, time) DO NOTHING
 `
 
 type InsertEventParams struct {
@@ -90,8 +90,8 @@ type InsertEventParams struct {
 	Subject         pgtype.Text
 }
 
-func (q *Queries) InsertEvent(ctx context.Context, arg InsertEventParams) (Event, error) {
-	row := q.db.QueryRow(ctx, insertEvent,
+func (q *Queries) InsertEvent(ctx context.Context, arg InsertEventParams) error {
+	_, err := q.db.Exec(ctx, insertEvent,
 		arg.ID,
 		arg.Source,
 		arg.Type,
@@ -101,16 +101,5 @@ func (q *Queries) InsertEvent(ctx context.Context, arg InsertEventParams) (Event
 		arg.Time,
 		arg.Subject,
 	)
-	var i Event
-	err := row.Scan(
-		&i.ID,
-		&i.Source,
-		&i.Type,
-		&i.Specversion,
-		&i.Datacontenttype,
-		&i.Data,
-		&i.Time,
-		&i.Subject,
-	)
-	return i, err
+	return err
 }
