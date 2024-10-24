@@ -76,7 +76,7 @@ func (q *Queries) GetEventsUpTo(ctx context.Context, time pgtype.Timestamptz) ([
 }
 
 const insertEvent = `-- name: InsertEvent :one
-INSERT INTO events (id, source, type, specversion, datacontenttype, data, time, subject) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) ON CONFLICT (id) DO NOTHING RETURNING id, source, type, specversion, datacontenttype, data, time, subject
+INSERT INTO events (id, source, type, specversion, datacontenttype, data, time, subject) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) ON CONFLICT(id, time) DO NOTHING RETURNING id, source, type, specversion, datacontenttype, data, time, subject
 `
 
 type InsertEventParams struct {
