@@ -4,6 +4,12 @@
   config,
   ...
 }: {
+  packages = with pkgs; [
+    natscli
+    nats-top
+    nats-server
+  ];
+
   pre-commit = {
     hooks = {
       check-merge-conflicts.enable = true;
@@ -39,10 +45,10 @@
       description = "Generate the documentation references";
     };
   };
-  languages.go = {
-    enable = true;
-    package = pkgs.go;
-  };
+  # languages.go = {
+  #   enable = true;
+  #   package = pkgs.go;
+  # };
 
   enterShell = ''
     echo
