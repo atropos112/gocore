@@ -43,7 +43,7 @@ func (e *PubSubEvent) ToDBInstertEventParams() InsertEventParams {
 		Datacontenttype: pgtype.Text{String: e.Datacontenttype, Valid: true},
 		Data:            e.Data,
 		Time:            pgtype.Timestamptz{Time: e.Time, Valid: true},
-		Subject:         pgtype.Text{String: e.Subject},
+		Subject:         pgtype.Text{String: e.Subject, Valid: true},
 	}
 }
 
