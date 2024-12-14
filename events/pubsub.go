@@ -33,6 +33,20 @@ func (e *PubSubEvent) ToDBEvent() Event {
 	}
 }
 
+// ToDBInstertEventParams provides a way to insert the event into the database.
+func (e *PubSubEvent) ToDBInstertEventParams() InsertEventParams {
+	return InsertEventParams{
+		ID:              e.ID,
+		Source:          e.Source,
+		Type:            e.Type,
+		Specversion:     e.Specversion,
+		Datacontenttype: pgtype.Text{String: e.Datacontenttype, Valid: true},
+		Data:            e.Data,
+		Time:            pgtype.Timestamptz{Time: e.Time, Valid: true},
+		Subject:         pgtype.Text{String: e.Subject},
+	}
+}
+
 // ToPubSubEvent transforms DBEvent to PubSubEvent.
 func (e *Event) ToPubSubEvent() PubSubEvent {
 	return PubSubEvent{

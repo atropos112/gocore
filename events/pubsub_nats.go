@@ -1,6 +1,7 @@
 package events
 
 import (
+	"context"
 	"encoding/json"
 	"log/slog"
 	"time"
@@ -23,7 +24,36 @@ func CreateNATSSubscriber(natsUrl string) (*nats.Subscriber, error) {
 		panic("natsUrl must start with " + NatsURLPrefix)
 	}
 
-	return nats.NewSubscriber(nats.SubscriberConfig{URL: natsUrl}, watermill.NewStdLogger(false, false))
+	options := []nc.Option{
+		nc.RetryOnFailedConnect(true),
+		nc.Timeout(30 * time.Second),
+		nc.ReconnectWait(1 * time.Second),
+	}
+	six_hour_before := time.Now().Add(-6 * time.Hour)
+
+	subscribeOptions := []nc.SubOpt{
+		nc.StartTime(six_hour_before),
+		nc.AckExplicit(),
+	}
+
+	jsConfig := nats.JetStreamConfig{
+		Disabled:         false,
+		AutoProvision:    true,
+		ConnectOptions:   nil,
+		SubscribeOptions: subscribeOptions,
+		PublishOptions:   nil,
+		TrackMsgId:       false,
+		AckAsync:         false,
+		DurablePrefix:    "",
+	}
+
+	return nats.NewSubscriber(nats.SubscriberConfig{
+		URL:              natsUrl,
+		SubscribersCount: 1,
+		NatsOptions:      options,
+		JetStream:        jsConfig,
+		Unmarshaler:      &nats.GobMarshaler{},
+	}, watermill.NewStdLogger(false, false))
 }
 
 func CreateNATSPublisher(natsURL string) (*nats.Publisher, error) {
@@ -68,6 +98,31 @@ func CreateNATSPublisher(natsURL string) (*nats.Publisher, error) {
 	}
 
 	return publisher, nil
+}
+
+func SubscribeToNATS(topic string) (<-chan *message.Message, error) {
+	natsURL := utils.GetCredUnsafe("ATRO_NATS_URL")
+	l := slog.Default().With("topic", topic, "nats_url", natsURL)
+
+	l.Info("Creating NATS Subscriber")
+	subscriber, err := CreateNATSSubscriber(natsURL)
+	if err != nil {
+		l.Error("Failed to create NATS Subscriber", "error", err)
+
+		return nil, err
+	}
+
+	l.Info("Subscribing to NATS topic")
+	messages, err := subscriber.Subscribe(context.Background(), topic)
+	if err != nil {
+		l.Error("Failed to subscribe to NATS topic", "error", err)
+
+		return nil, err
+	}
+
+	l.Info("Successfully subscribed to NATS topic")
+
+	return messages, nil
 }
 
 func PublishToNATS(topic string, event PubSubEvent) error {
