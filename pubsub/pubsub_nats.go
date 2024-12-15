@@ -38,6 +38,7 @@ func CreateNATSSubscriber(natsUrl string) (*nats.Subscriber, error) {
 	if natsUrl[:len(NatsURLPrefix)] != NatsURLPrefix {
 		panic("natsUrl must start with " + NatsURLPrefix)
 	}
+	marshaler := &nats.JSONMarshaler{}
 
 	options := []nc.Option{
 		nc.RetryOnFailedConnect(true),
@@ -67,7 +68,7 @@ func CreateNATSSubscriber(natsUrl string) (*nats.Subscriber, error) {
 		SubscribersCount: 1,
 		NatsOptions:      options,
 		JetStream:        jsConfig,
-		Unmarshaler:      &nats.GobMarshaler{},
+		Unmarshaler:      marshaler,
 	}, InitWatermillLogger(),
 	)
 }
@@ -77,7 +78,7 @@ func CreateNATSPublisher(natsURL string) (*nats.Publisher, error) {
 		panic("natsUrl must start with " + NatsURLPrefix)
 	}
 
-	marshaler := &nats.GobMarshaler{}
+	marshaler := &nats.JSONMarshaler{}
 	options := []nc.Option{
 		nc.RetryOnFailedConnect(true),
 		nc.Timeout(30 * time.Second),
@@ -146,7 +147,7 @@ func SubscribeToNATS(topic string) (<-chan *message.Message, error) {
 	return messages, nil
 }
 
-func PublishToNATS(topic string, event any) error {
+func PublishToNATS(topic string, event PublishableObject) error {
 	// Might be too "thick" on logging here, will reduce it later if needed
 	natsURL := utils.GetCredUnsafe("GOCORE_NATS_URL")
 
@@ -171,7 +172,7 @@ func PublishToNATS(topic string, event any) error {
 	l.Info("Created watermill message", "uuid", msgUUID)
 
 	l.Info("Publishing message to NATS")
-	if err := publisher.Publish("events", msg); err != nil {
+	if err := publisher.Publish(topic, msg); err != nil {
 		l.Error("Failed to publish event to NATS", "error", err)
 		return err
 	}

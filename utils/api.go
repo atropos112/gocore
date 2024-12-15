@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"log/slog"
 	"net/http"
 	"reflect"
@@ -112,7 +111,7 @@ func MakePutRequest(client *http.Client, apiBaseURL, endpoint, token string, req
 }
 
 // RunAPIServer attaches logging middleware to the default http server and starts it on the specified port.
-func RunAPIServer(port int) {
+func RunAPIServer(port int) error {
 	l := slog.Default()
 
 	// mux router
@@ -129,5 +128,5 @@ func RunAPIServer(port int) {
 	// Start server
 	addr := fmt.Sprintf(":%d", port)
 	l.Info("Starting API server", "port", port)
-	log.Fatal(http.ListenAndServe(addr, handler))
+	return http.ListenAndServe(addr, handler)
 }
