@@ -20,7 +20,7 @@ type DatabasePublisher struct {
 	Logger  *slog.Logger
 }
 
-func NewDatabasePublisher() *DatabasePublisher {
+func NewDatabasePublisher() DatabasePublisher {
 	l := slog.Default()
 	ctx := context.Background()
 
@@ -40,7 +40,7 @@ func NewDatabasePublisher() *DatabasePublisher {
 	queries := New(conn)
 
 	l.Info("Connected to PSQL", "host", host, "port", pSQLPort)
-	return &DatabasePublisher{
+	return DatabasePublisher{
 		Queries: queries,
 		Context: &ctx,
 		Logger:  l,
