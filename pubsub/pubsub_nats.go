@@ -1,4 +1,4 @@
-package events
+package pubsub
 
 import (
 	"context"
@@ -9,12 +9,26 @@ import (
 	"github.com/ThreeDotsLabs/watermill"
 	"github.com/ThreeDotsLabs/watermill-nats/v2/pkg/nats"
 	"github.com/ThreeDotsLabs/watermill/message"
+	"github.com/ThreeDotsLabs/watermill/message/router/middleware"
+	"github.com/ThreeDotsLabs/watermill/message/router/plugin"
+	. "github.com/atropos112/gocore/logging"
 	"github.com/atropos112/gocore/utils"
 	nc "github.com/nats-io/nats.go"
 )
 
 // NatsUrlPrefix  is the prefix for NATS URLs.
 const NatsURLPrefix = "nats://"
+
+func GetNATSURLFromEnv() string {
+	natsURL, err := utils.GetCred("ATRO_NATS_URL")
+
+	if _, ok := err.(*utils.NoCredFoundError); ok {
+		slog.Default().Warn("Failed to get NATS URL, using default")
+		natsURL = "nats://nats:4222" // Default NATS URL, the tailscale one.
+	}
+
+	return natsURL
+}
 
 // CreateSubscriber creates a new NATS publisher.
 // Can then use it to subscribe to topic like
@@ -53,7 +67,8 @@ func CreateNATSSubscriber(natsUrl string) (*nats.Subscriber, error) {
 		NatsOptions:      options,
 		JetStream:        jsConfig,
 		Unmarshaler:      &nats.GobMarshaler{},
-	}, watermill.NewStdLogger(false, false))
+	}, InitWatermillLogger(),
+	)
 }
 
 func CreateNATSPublisher(natsURL string) (*nats.Publisher, error) {
@@ -61,7 +76,6 @@ func CreateNATSPublisher(natsURL string) (*nats.Publisher, error) {
 		panic("natsUrl must start with " + NatsURLPrefix)
 	}
 
-	logger := watermill.NewStdLogger(false, false)
 	marshaler := &nats.GobMarshaler{}
 	options := []nc.Option{
 		nc.RetryOnFailedConnect(true),
@@ -91,7 +105,7 @@ func CreateNATSPublisher(natsURL string) (*nats.Publisher, error) {
 			Marshaler:   marshaler,
 			JetStream:   jsConfig,
 		},
-		logger,
+		InitWatermillLogger(),
 	)
 	if err != nil {
 		panic(err)
@@ -101,7 +115,13 @@ func CreateNATSPublisher(natsURL string) (*nats.Publisher, error) {
 }
 
 func SubscribeToNATS(topic string) (<-chan *message.Message, error) {
-	natsURL := utils.GetCredUnsafe("ATRO_NATS_URL")
+	natsURL, err := utils.GetCred("ATRO_NATS_URL")
+
+	if _, ok := err.(*utils.NoCredFoundError); ok {
+		slog.Default().Warn("Failed to get NATS URL, using default")
+		natsURL = "nats://nats:4222" // Default NATS URL, the tailscale one.
+	}
+
 	l := slog.Default().With("topic", topic, "nats_url", natsURL)
 
 	l.Info("Creating NATS Subscriber")
@@ -125,14 +145,20 @@ func SubscribeToNATS(topic string) (<-chan *message.Message, error) {
 	return messages, nil
 }
 
-func PublishToNATS(topic string, event PubSubEvent) error {
+func PublishToNATS(topic string, event PublishableObject) error {
 	// Might be too "thick" on logging here, will reduce it later if needed
 
-	natsUrl := utils.GetCredUnsafe("ATRO_NATS_URL")
-	l := slog.Default().With("topic", topic, "nats_url", natsUrl)
+	natsURL, err := utils.GetCred("ATRO_NATS_URL")
+
+	if _, ok := err.(*utils.NoCredFoundError); ok {
+		slog.Default().Warn("Failed to get NATS URL, setting for default")
+		natsURL = "nats://nats:4222" // Default NATS URL, the tailscale one.
+	}
+
+	l := slog.Default().With("topic", topic, "nats_url", natsURL)
 
 	l.Info("Creating NATS Publisher")
-	publisher, err := CreateNATSPublisher(natsUrl)
+	publisher, err := CreateNATSPublisher(natsURL)
 	if err != nil {
 		l.Error("Failed to create NATS Publisher", "error", err)
 		return err
@@ -157,4 +183,86 @@ func PublishToNATS(topic string, event PubSubEvent) error {
 
 	l.Info("Succesfully published event to NATS")
 	return nil
+}
+
+func ErrorAlertAndDie(l *slog.Logger, source, msg string, args ...any) {
+	ErrorAlert(l, source, msg, args...)
+	panic("Failed with message: " + msg)
+}
+
+func ErrorAlert(l *slog.Logger, source, msg string, args ...any) {
+	l.Error(msg, args...)
+
+	argsMap := make(map[string]any)
+	for i := 0; i < len(args); i += 2 {
+		argsMap[args[i].(string)] = args[i+1]
+	}
+
+	PublishToNATS(NatsErrorsTopic, PubSubError{
+		Source:  source,
+		Message: msg,
+		Args:    argsMap,
+	})
+}
+
+func GetCredOrAlertAndDie(l *slog.Logger, source, value string) string {
+	cred, err := utils.GetCred(value)
+	if err != nil {
+		ErrorAlertAndDie(l, source, "Failed to get credential", "error", err)
+	}
+
+	return cred
+}
+
+type structHandler struct {
+	// we can add some dependencies here
+}
+
+func (h structHandler) Handler(msg *message.Message) error {
+	// handle the message here
+	return nil
+}
+
+func Test() {
+	logger := InitWatermillLogger()
+	router, err := message.NewRouter(message.RouterConfig{}, logger)
+	if err != nil {
+		panic(err)
+	}
+
+	// Politely close the router when the program exits
+	router.AddPlugin(plugin.SignalsHandler)
+
+	router.AddMiddleware(
+		// CorrelationID will copy the correlation id from the incoming message's metadata to the produced messages
+		middleware.CorrelationID,
+
+		// Recover from panics
+		middleware.Recoverer,
+	)
+
+	subscriber, err := CreateNATSSubscriber(GetNATSURLFromEnv())
+	if err != nil {
+		panic(err)
+	}
+
+	router.AddNoPublisherHandler(
+		"example_handler",
+		NatsTestTopic, // Test topic name.
+		subscriber,
+		structHandler{}.Handler,
+	)
+
+	// handler := router.AddHandler(
+	// 	"example_handler",
+	// 	NatsTestTopic, // Test topic name.
+	// 	subscriber,
+	// 	NatsTestTopic, // Test topic name.
+	// 	publisher,
+	// )
+	ctx := context.Background()
+
+	if err := router.Run(ctx); err != nil {
+		panic(err)
+	}
 }

@@ -1,11 +1,14 @@
-package events
+package pubsub
 
 import (
 	"encoding/json"
 	"time"
 
+	"github.com/atropos112/gocore/events"
 	"github.com/jackc/pgx/v5/pgtype"
 )
+
+type PublishableObject any
 
 // PubSubEvent represents an event that is sent over the pubsub system.
 type PubSubEvent struct {
@@ -19,9 +22,15 @@ type PubSubEvent struct {
 	Subject         string    `json:"subject"`
 }
 
+type PubSubError struct {
+	Source  string         `json:"source"`
+	Message string         `json:"message"`
+	Args    map[string]any `json:"args"`
+}
+
 // ToDBEvent transforms PubSubEvent to DBEvent.
-func (e *PubSubEvent) ToDBEvent() Event {
-	return Event{
+func (e *PubSubEvent) ToDBEvent() events.Event {
+	return events.Event{
 		ID:              e.ID,
 		Source:          e.Source,
 		Type:            e.Type,
@@ -34,8 +43,8 @@ func (e *PubSubEvent) ToDBEvent() Event {
 }
 
 // ToDBInstertEventParams provides a way to insert the event into the database.
-func (e *PubSubEvent) ToDBInstertEventParams() InsertEventParams {
-	return InsertEventParams{
+func (e *PubSubEvent) ToDBInstertEventParams() events.InsertEventParams {
+	return events.InsertEventParams{
 		ID:              e.ID,
 		Source:          e.Source,
 		Type:            e.Type,
@@ -48,7 +57,7 @@ func (e *PubSubEvent) ToDBInstertEventParams() InsertEventParams {
 }
 
 // ToPubSubEvent transforms DBEvent to PubSubEvent.
-func (e *Event) ToPubSubEvent() PubSubEvent {
+func ToPubSubEvent(e *events.Event) PubSubEvent {
 	return PubSubEvent{
 		ID:              e.ID,
 		Source:          e.Source,
