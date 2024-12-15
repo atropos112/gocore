@@ -147,7 +147,7 @@ func SubscribeToNATS(topic string) (<-chan *message.Message, error) {
 	return messages, nil
 }
 
-func PublishToNATS(topic string, event PublishableObject) error {
+func PublishToNATS(topic string, event PublishableObject, metadata map[string]string) error {
 	// Might be too "thick" on logging here, will reduce it later if needed
 	natsURL := utils.GetCredUnsafe("GOCORE_NATS_URL")
 
@@ -169,6 +169,7 @@ func PublishToNATS(topic string, event PublishableObject) error {
 
 	msgUUID := watermill.NewUUID()
 	msg := message.NewMessage(msgUUID, message.Payload(eventBytes))
+	msg.Metadata = metadata
 	l.Info("Created watermill message", "uuid", msgUUID)
 
 	l.Info("Publishing message to NATS")
@@ -185,8 +186,8 @@ func NewNATSAlertContext(l *slog.Logger, source string) *AlertContext {
 	return &AlertContext{
 		Source: source,
 		Logger: l,
-		Publish: func(obj PublishableObject) {
-			err := PublishToNATS(NatsErrorsTopic, obj)
+		Publish: func(obj PublishableObject, source string) {
+			err := PublishToNATS(NatsErrorsTopic, obj, map[string]string{"source": source})
 			if err != nil {
 				panic("Failed to publish error to NATS")
 			}

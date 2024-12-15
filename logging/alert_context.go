@@ -8,14 +8,13 @@ import (
 )
 
 type PubSubError struct {
-	Source  string         `json:"source"`
 	Message string         `json:"message"`
 	Args    map[string]any `json:"args"`
 }
 
 type AlertContext struct {
 	Logger  *slog.Logger
-	Publish func(pub_obj PublishableObject)
+	Publish func(pub_obj PublishableObject, source string)
 	Source  string
 }
 
@@ -27,10 +26,9 @@ func (a *AlertContext) Error(msg string, args ...any) {
 	}
 
 	a.Publish(PubSubError{
-		Source:  a.Source,
 		Message: msg,
 		Args:    argsMap,
-	})
+	}, a.Source)
 }
 
 func (a *AlertContext) ErrorAndDie(msg string, args ...any) {
