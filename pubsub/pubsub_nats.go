@@ -12,6 +12,7 @@ import (
 	"github.com/ThreeDotsLabs/watermill/message/router/middleware"
 	"github.com/ThreeDotsLabs/watermill/message/router/plugin"
 	. "github.com/atropos112/gocore/logging"
+	. "github.com/atropos112/gocore/types"
 	"github.com/atropos112/gocore/utils"
 	nc "github.com/nats-io/nats.go"
 )
@@ -145,15 +146,9 @@ func SubscribeToNATS(topic string) (<-chan *message.Message, error) {
 	return messages, nil
 }
 
-func PublishToNATS(topic string, event PublishableObject) error {
+func PublishToNATS(topic string, event any) error {
 	// Might be too "thick" on logging here, will reduce it later if needed
-
-	natsURL, err := utils.GetCred("ATRO_NATS_URL")
-
-	if _, ok := err.(*utils.NoCredFoundError); ok {
-		slog.Default().Warn("Failed to get NATS URL, setting for default")
-		natsURL = "nats://nats:4222" // Default NATS URL, the tailscale one.
-	}
+	natsURL := utils.GetCredUnsafe("GOCORE_NATS_URL")
 
 	l := slog.Default().With("topic", topic, "nats_url", natsURL)
 
@@ -185,84 +180,36 @@ func PublishToNATS(topic string, event PublishableObject) error {
 	return nil
 }
 
-func ErrorAlertAndDie(l *slog.Logger, source, msg string, args ...any) {
-	ErrorAlert(l, source, msg, args...)
-	panic("Failed with message: " + msg)
-}
-
-func ErrorAlert(l *slog.Logger, source, msg string, args ...any) {
-	l.Error(msg, args...)
-
-	argsMap := make(map[string]any)
-	for i := 0; i < len(args); i += 2 {
-		argsMap[args[i].(string)] = args[i+1]
+func NewNATSAlertContext(l *slog.Logger, source string) *AlertContext {
+	return &AlertContext{
+		Source: source,
+		Logger: l,
+		Publish: func(obj PublishableObject) {
+			err := PublishToNATS(NatsErrorsTopic, obj)
+			if err != nil {
+				panic("Failed to publish error to NATS")
+			}
+		},
 	}
-
-	PublishToNATS(NatsErrorsTopic, PubSubError{
-		Source:  source,
-		Message: msg,
-		Args:    argsMap,
-	})
 }
 
-func GetCredOrAlertAndDie(l *slog.Logger, source, value string) string {
-	cred, err := utils.GetCred(value)
-	if err != nil {
-		ErrorAlertAndDie(l, source, "Failed to get credential", "error", err)
-	}
+func NewEventNATSRouter(l *slog.Logger) *message.Router {
+	watermillLogger := watermill.NewSlogLogger(l)
 
-	return cred
-}
-
-type structHandler struct {
-	// we can add some dependencies here
-}
-
-func (h structHandler) Handler(msg *message.Message) error {
-	// handle the message here
-	return nil
-}
-
-func Test() {
-	logger := InitWatermillLogger()
-	router, err := message.NewRouter(message.RouterConfig{}, logger)
+	router, err := message.NewRouter(message.RouterConfig{}, watermillLogger)
 	if err != nil {
 		panic(err)
 	}
 
-	// Politely close the router when the program exits
 	router.AddPlugin(plugin.SignalsHandler)
 
 	router.AddMiddleware(
-		// CorrelationID will copy the correlation id from the incoming message's metadata to the produced messages
+		// Add timeout to context, in case of a timeout, the message will be nacked.
+		middleware.Timeout(time.Second*10),
+
+		// Add correlation ID to context,
 		middleware.CorrelationID,
-
-		// Recover from panics
-		middleware.Recoverer,
 	)
 
-	subscriber, err := CreateNATSSubscriber(GetNATSURLFromEnv())
-	if err != nil {
-		panic(err)
-	}
-
-	router.AddNoPublisherHandler(
-		"example_handler",
-		NatsTestTopic, // Test topic name.
-		subscriber,
-		structHandler{}.Handler,
-	)
-
-	// handler := router.AddHandler(
-	// 	"example_handler",
-	// 	NatsTestTopic, // Test topic name.
-	// 	subscriber,
-	// 	NatsTestTopic, // Test topic name.
-	// 	publisher,
-	// )
-	ctx := context.Background()
-
-	if err := router.Run(ctx); err != nil {
-		panic(err)
-	}
+	return router
 }

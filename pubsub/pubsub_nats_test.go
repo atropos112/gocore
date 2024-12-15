@@ -15,5 +15,5 @@ func TestSlogFatalWithAlerting(t *testing.T) {
 
 	l := logging.InitSlogLogger()
 
-	ErrorAlertAndDie(l, "test", "test", "a", 1, "b", 2)
+	NewNATSAlertContext(l, "test").ErrorAndDie("test", "a", 1, "b", 2)
 }
