@@ -1,7 +1,6 @@
 package pubsub
 
 import (
-	"context"
 	"encoding/json"
 	"log/slog"
 	"time"
@@ -34,7 +33,7 @@ func GetNATSURLFromEnv() string {
 // CreateSubscriber creates a new NATS publisher.
 // Can then use it to subscribe to topic like
 // messages, err := subscriber.Subscribe(context.Background(), "example.topic")
-func CreateNATSSubscriber(natsUrl string) (*nats.Subscriber, error) {
+func CreateNATSSubscriber(natsUrl string, startTime time.Time) (*nats.Subscriber, error) {
 	if natsUrl[:len(NatsURLPrefix)] != NatsURLPrefix {
 		panic("natsUrl must start with " + NatsURLPrefix)
 	}
@@ -45,10 +44,9 @@ func CreateNATSSubscriber(natsUrl string) (*nats.Subscriber, error) {
 		nc.Timeout(30 * time.Second),
 		nc.ReconnectWait(1 * time.Second),
 	}
-	six_hour_before := time.Now().Add(-6 * time.Hour)
 
 	subscribeOptions := []nc.SubOpt{
-		nc.StartTime(six_hour_before),
+		nc.StartTime(startTime),
 		nc.AckExplicit(),
 	}
 
@@ -114,37 +112,6 @@ func CreateNATSPublisher(natsURL string) (*nats.Publisher, error) {
 	}
 
 	return publisher, nil
-}
-
-func SubscribeToNATS(topic string) (<-chan *message.Message, error) {
-	natsURL, err := utils.GetCred("ATRO_NATS_URL")
-
-	if _, ok := err.(*utils.NoCredFoundError); ok {
-		slog.Default().Warn("Failed to get NATS URL, using default")
-		natsURL = "nats://nats:4222" // Default NATS URL, the tailscale one.
-	}
-
-	l := slog.Default().With("topic", topic, "nats_url", natsURL)
-
-	l.Info("Creating NATS Subscriber")
-	subscriber, err := CreateNATSSubscriber(natsURL)
-	if err != nil {
-		l.Error("Failed to create NATS Subscriber", "error", err)
-
-		return nil, err
-	}
-
-	l.Info("Subscribing to NATS topic")
-	messages, err := subscriber.Subscribe(context.Background(), topic)
-	if err != nil {
-		l.Error("Failed to subscribe to NATS topic", "error", err)
-
-		return nil, err
-	}
-
-	l.Info("Successfully subscribed to NATS topic")
-
-	return messages, nil
 }
 
 func PublishToNATS(topic string, event PublishableObject, metadata map[string]string) error {
