@@ -2,12 +2,16 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
-}: {
-  packages = with pkgs; [
+}: let
+  pkgu = import inputs.nixpkgs-unstable {system = pkgs.stdenv.system;};
+in {
+  packages = with pkgu; [
     natscli
     nats-top
     nats-server
+    gomarkdoc
   ];
 
   pre-commit = {

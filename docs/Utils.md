@@ -12,13 +12,12 @@ import "github.com/atropos112/gocore/utils"
 - [func ArrContainsArr\[T constraints.Ordered\]\(arr \[\]T, subArr \[\]T\) bool](<#ArrContainsArr>)
 - [func GetCred\(value string\) \(string, error\)](<#GetCred>)
 - [func GetCredUnsafe\(value string\) string](<#GetCredUnsafe>)
-- [func GetInitLogger\(\) \*slog.Logger](<#GetInitLogger>)
 - [func MakeAPIRequest\(client \*http.Client, kind, apiBaseURL, endpoint, token string, request, response interface\{\}\) error](<#MakeAPIRequest>)
 - [func MakeDeleteRequest\(client \*http.Client, apiBaseURL, endpoint, token string, response interface\{\}\) error](<#MakeDeleteRequest>)
 - [func MakeGetRequest\(client \*http.Client, apiBaseURL, endpoint, token string, response interface\{\}\) error](<#MakeGetRequest>)
 - [func MakePostRequest\(client \*http.Client, apiBaseURL, endpoint, token string, request, response interface\{\}\) error](<#MakePostRequest>)
 - [func MakePutRequest\(client \*http.Client, apiBaseURL, endpoint, token string, request, response interface\{\}\) error](<#MakePutRequest>)
-- [func RunAPIServer\(port int\)](<#RunAPIServer>)
+- [func RunAPIServer\(port int\) error](<#RunAPIServer>)
 - [type APIError](<#APIError>)
   - [func \(e \*APIError\) Error\(\) string](<#APIError.Error>)
 - [type AuthenticatedAPIClient](<#AuthenticatedAPIClient>)
@@ -71,15 +70,6 @@ func GetCredUnsafe(value string) string
 
 GetCredUnsafe is a function that gets a credential from the environment variables. If the credential is not found, it will log a fatal error.
 
-<a name="GetInitLogger"></a>
-## func GetInitLogger
-
-```go
-func GetInitLogger() *slog.Logger
-```
-
-Initializes a new josn logger and sets it as the default logger
-
 <a name="MakeAPIRequest"></a>
 ## func MakeAPIRequest
 
@@ -129,7 +119,7 @@ MakePutRequest is a helper function to make a PUT request to the specified endpo
 ## func RunAPIServer
 
 ```go
-func RunAPIServer(port int)
+func RunAPIServer(port int) error
 ```
 
 RunAPIServer attaches logging middleware to the default http server and starts it on the specified port.
