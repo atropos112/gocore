@@ -2,10 +2,8 @@
   pkgs,
   lib,
   config,
-  inputs,
   ...
 }: let
-  pkgu = import inputs.nixpkgs-unstable {system = pkgs.stdenv.system;};
   # writeShellScript here is identity to cause treesitter to format bash scripts correctly.
   writeShellScript = name: script: script;
   helpScript = writeShellScript "help" ''
@@ -18,25 +16,29 @@
     echo
   '';
 in {
-  packages = with pkgu; [
+  packages = with pkgs; [
     natscli
     nats-top
     nats-server
     gomarkdoc
   ];
 
-  pre-commit = {
-    hooks = {
-      check-merge-conflicts.enable = true;
-      check-added-large-files.enable = true;
-      editorconfig-checker.enable = true;
-      govet.enable = true;
-      gofmt.enable = true;
-      gen-doc-refs = {
-        enable = true;
-        entry = ''gen-doc-refs '';
-      };
+  pre-commit.hooks = {
+    check-added-large-files.enable = true;
+    editorconfig-checker.enable = true;
+    gen-doc-refs = {
+      enable = true;
+      entry = ''gen-doc-refs '';
     };
+    gofmt.enable = true;
+    govet.enable = true;
+    golangci-lint.enable = true;
+    mixed-line-endings.enable = true;
+    end-of-file-fixer.enable = true;
+    check-symlinks.enable = true;
+    check-merge-conflicts.enable = true;
+    actionlint.enable = true;
+    revive.enable = true;
   };
 
   enterTest = writeShellScript "test" ''
@@ -51,6 +53,9 @@ in {
       description = "Run the documentation server";
     };
     gen-doc-refs = {
+      # TODO: Do we need this ?
+      # TODO: Can use similar definition for writeShellScript as in atrk
+      # to deal with DIR matters.
       exec = writeShellScript "gen-doc-refs" ''
         CURRENT_DIR=$PWD
         cd $CURRENT_DIR/vikunja && gomarkdoc --output ../docs/Vikunja.md
@@ -64,10 +69,11 @@ in {
       description = "Show this help message";
     };
   };
-  # languages.go = {
-  #   enable = true;
-  #   package = pkgs.go;
-  # };
+  languages.go = {
+    enable = true;
+    enableHardeningWorkaround = true;
+    package = pkgs.go;
+  };
 
   enterShell = helpScript;
 }

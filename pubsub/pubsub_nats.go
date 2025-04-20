@@ -156,6 +156,7 @@ func NewNATSAlertContext(l *slog.Logger, source string) *AlertContext {
 		Publish: func(obj PublishableObject, source string) {
 			err := PublishToNATS(NatsErrorsTopic, obj, map[string]string{"source": source})
 			if err != nil {
+				l.Error(err.Error())
 				panic("Failed to publish error to NATS")
 			}
 		},
