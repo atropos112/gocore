@@ -116,7 +116,7 @@ func CreateNATSPublisher(natsURL string) (*nats.Publisher, error) {
 
 func PublishToNATS(topic string, event PublishableObject, metadata map[string]string) error {
 	// Might be too "thick" on logging here, will reduce it later if needed
-	natsURL := utils.GetCredUnsafe("atrogolib_NATS_URL")
+	natsURL := utils.GetCredUnsafe("ATRO_NATS_URL")
 
 	l := slog.Default().With("topic", topic, "nats_url", natsURL)
 
