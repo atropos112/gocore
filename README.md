@@ -1,8 +1,8 @@
-# GoCore
+# atrogolib
 
 This is an "all-in-one" library package in Go that contains all sorts of utilities, helpers, structs that can be used in variety of places. I am using it extensively in my homelab stuff.
 
-Should certain part of gocore get sizable enough, it will likely be split into its own package. The aim is to let things grow organically and see what needs splitting rather than split pre-emptively stupid number of repos unnecessarily.
+Should certain part of atrogolib get sizable enough, it will likely be split into its own package. The aim is to let things grow organically and see what needs splitting rather than split pre-emptively stupid number of repos unnecessarily.
 
 # Dependencies
 

@@ -10,9 +10,9 @@ import (
 	"github.com/ThreeDotsLabs/watermill/message"
 	"github.com/ThreeDotsLabs/watermill/message/router/middleware"
 	"github.com/ThreeDotsLabs/watermill/message/router/plugin"
-	. "github.com/atropos112/gocore/logging"
-	. "github.com/atropos112/gocore/types"
-	"github.com/atropos112/gocore/utils"
+	. "github.com/atropos112/atrogolib/logging"
+	. "github.com/atropos112/atrogolib/types"
+	"github.com/atropos112/atrogolib/utils"
 	nc "github.com/nats-io/nats.go"
 )
 
@@ -116,7 +116,7 @@ func CreateNATSPublisher(natsURL string) (*nats.Publisher, error) {
 
 func PublishToNATS(topic string, event PublishableObject, metadata map[string]string) error {
 	// Might be too "thick" on logging here, will reduce it later if needed
-	natsURL := utils.GetCredUnsafe("GOCORE_NATS_URL")
+	natsURL := utils.GetCredUnsafe("atrogolib_NATS_URL")
 
 	l := slog.Default().With("topic", topic, "nats_url", natsURL)
 

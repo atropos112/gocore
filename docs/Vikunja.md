@@ -3,7 +3,7 @@
 # vikunja
 
 ```go
-import "github.com/atropos112/gocore/vikunja"
+import "github.com/atropos112/atrogolib/vikunja"
 ```
 
 ## Index

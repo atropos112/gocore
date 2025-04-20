@@ -3,8 +3,8 @@ package logging
 import (
 	"log/slog"
 
-	. "github.com/atropos112/gocore/types"
-	"github.com/atropos112/gocore/utils"
+	. "github.com/atropos112/atrogolib/types"
+	"github.com/atropos112/atrogolib/utils"
 )
 
 type PubSubError struct {

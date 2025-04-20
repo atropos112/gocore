@@ -3,7 +3,7 @@
 # utils
 
 ```go
-import "github.com/atropos112/gocore/utils"
+import "github.com/atropos112/atrogolib/utils"
 ```
 
 ## Index

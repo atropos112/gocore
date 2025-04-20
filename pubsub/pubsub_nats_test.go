@@ -3,7 +3,7 @@ package pubsub
 import (
 	"testing"
 
-	"github.com/atropos112/gocore/logging"
+	"github.com/atropos112/atrogolib/logging"
 )
 
 func TestSlogFatalWithAlerting(t *testing.T) {

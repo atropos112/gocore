@@ -1,6 +1,6 @@
-module github.com/atropos112/gocore
+module github.com/atropos112/atrogolib
 
-go 1.23.3
+go 1.24.1
 
 require (
 	github.com/ThreeDotsLabs/watermill v1.4.1
