@@ -9,4 +9,6 @@ const (
 
 	// TestTopic is topic used for testing
 	NatsTestTopic = "test"
+
+	NatsURLPrefix = "nats://"
 )

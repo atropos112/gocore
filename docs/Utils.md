@@ -13,10 +13,10 @@ import "github.com/atropos112/atrogolib/utils"
 - [func GetCred\(value string\) \(string, error\)](<#GetCred>)
 - [func GetCredUnsafe\(value string\) string](<#GetCredUnsafe>)
 - [func MakeAPIRequest\(client \*http.Client, kind, apiBaseURL, endpoint, token string, request, response interface\{\}\) error](<#MakeAPIRequest>)
-- [func MakeDeleteRequest\(client \*http.Client, apiBaseURL, endpoint, token string, response interface\{\}\) error](<#MakeDeleteRequest>)
-- [func MakeGetRequest\(client \*http.Client, apiBaseURL, endpoint, token string, response interface\{\}\) error](<#MakeGetRequest>)
-- [func MakePostRequest\(client \*http.Client, apiBaseURL, endpoint, token string, request, response interface\{\}\) error](<#MakePostRequest>)
-- [func MakePutRequest\(client \*http.Client, apiBaseURL, endpoint, token string, request, response interface\{\}\) error](<#MakePutRequest>)
+- [func MakeDeleteRequest\(client \*http.Client, apiBaseURL, endpoint, token string, response any\) error](<#MakeDeleteRequest>)
+- [func MakeGetRequest\(client \*http.Client, apiBaseURL, endpoint, token string, response any\) error](<#MakeGetRequest>)
+- [func MakePostRequest\(client \*http.Client, apiBaseURL, endpoint, token string, request, response any\) error](<#MakePostRequest>)
+- [func MakePutRequest\(client \*http.Client, apiBaseURL, endpoint, token string, request, response any\) error](<#MakePutRequest>)
 - [func RunAPIServer\(port int\) error](<#RunAPIServer>)
 - [type APIError](<#APIError>)
   - [func \(e \*APIError\) Error\(\) string](<#APIError.Error>)
@@ -83,7 +83,7 @@ MakeAPIRequest is a generic function to make an API request. It supports GET, PO
 ## func MakeDeleteRequest
 
 ```go
-func MakeDeleteRequest(client *http.Client, apiBaseURL, endpoint, token string, response interface{}) error
+func MakeDeleteRequest(client *http.Client, apiBaseURL, endpoint, token string, response any) error
 ```
 
 MakeDeleteRequest is a helper function to make a DELETE request to the specified endpoint. If token is not "" it will be added to the request as a Bearer token.
@@ -92,7 +92,7 @@ MakeDeleteRequest is a helper function to make a DELETE request to the specified
 ## func MakeGetRequest
 
 ```go
-func MakeGetRequest(client *http.Client, apiBaseURL, endpoint, token string, response interface{}) error
+func MakeGetRequest(client *http.Client, apiBaseURL, endpoint, token string, response any) error
 ```
 
 MakeGetRequest is a helper function to make a GET request to the specified endpoint. If token is not "" it will be added to the request as a Bearer token.
@@ -101,7 +101,7 @@ MakeGetRequest is a helper function to make a GET request to the specified endpo
 ## func MakePostRequest
 
 ```go
-func MakePostRequest(client *http.Client, apiBaseURL, endpoint, token string, request, response interface{}) error
+func MakePostRequest(client *http.Client, apiBaseURL, endpoint, token string, request, response any) error
 ```
 
 MakePostRequest is a helper function to make a POST request to the specified endpoint. If token is not "" it will be added to the request as a Bearer token.
@@ -110,7 +110,7 @@ MakePostRequest is a helper function to make a POST request to the specified end
 ## func MakePutRequest
 
 ```go
-func MakePutRequest(client *http.Client, apiBaseURL, endpoint, token string, request, response interface{}) error
+func MakePutRequest(client *http.Client, apiBaseURL, endpoint, token string, request, response any) error
 ```
 
 MakePutRequest is a helper function to make a PUT request to the specified endpoint. If token is not "" it will be added to the request as a Bearer token.

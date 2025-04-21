@@ -16,6 +16,11 @@
     echo
   '';
 in {
+  env = {
+    GOFLAGS = "-tags=assert";
+    ATRO_NATS_URL = "nats://nats:4222";
+  };
+
   packages = with pkgs; [
     natscli
     nats-top
@@ -58,7 +63,6 @@ in {
       # to deal with DIR matters.
       exec = writeShellScript "gen-doc-refs" ''
         CURRENT_DIR=$PWD
-        cd $CURRENT_DIR/vikunja && gomarkdoc --output ../docs/Vikunja.md
         cd $CURRENT_DIR/utils && gomarkdoc --output ../docs/Utils.md
         cd $CURRENT_DIR
       '';
