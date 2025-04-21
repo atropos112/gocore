@@ -22,14 +22,23 @@ in {
   };
 
   packages = with pkgs; [
+    # Docs
+    mdbook
+    mdbook-mermaid
+    mdbook-admonish
+    mdbook-linkcheck
+    mdbook-toc
+
+    # NATS
     natscli
     nats-top
     nats-server
-    gomarkdoc
+
+    # Other
+    gomarkdoc # TODO: Start using it
   ];
 
   pre-commit.hooks = {
-    check-added-large-files.enable = true;
     editorconfig-checker.enable = true;
     gen-doc-refs = {
       enable = true;

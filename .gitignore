@@ -10,3 +10,6 @@ devenv.local.nix
 
 # Coverage report
 coverage.out
+
+# Mdbook
+.book
