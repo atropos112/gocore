@@ -15,6 +15,10 @@
     EOF
     echo
   '';
+
+  testScript = writeShellScript "test" ''
+    ${pkgs.gotestsum}/bin/gotestsum --  ./... -race -coverprofile=coverage.out -covermode=atomic
+  '';
 in {
   env = {
     GOFLAGS = "-tags=assert";
@@ -36,6 +40,7 @@ in {
 
     # Other
     gomarkdoc # TODO: Start using it
+    gotestsum
   ];
 
   pre-commit.hooks = {
@@ -55,11 +60,13 @@ in {
     revive.enable = true;
   };
 
-  enterTest = writeShellScript "test" ''
-    go test ./... -race -coverprofile=coverage.out -covermode=atomic
-  '';
+  enterTest = testScript;
 
   scripts = {
+    run-tests = {
+      exec = testScript;
+      description = "Run tests";
+    };
     run-docs = {
       exec = writeShellScript "run-docs" ''
         mkdocs serve
