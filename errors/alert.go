@@ -101,10 +101,12 @@ func AlertErrAndDie(publisher pubsub.Publisher, err error) {
 	panic(AlertWrapError(publisher, err))
 }
 
-func AlertAndDie(publisher pubsub.Publisher, source, msg string, args ...any) {
-	assert.NotEmpty(source)
+func AlertAndDie(publisher pubsub.Publisher, msg string, args ...any) {
+	serviceName := os.Getenv("ATRO_SERVICE_NAME")
+	assert.NotEmpty(serviceName, "ATRO_SERVICE_NAME is empty.")
+
 	assert.NotEmpty(msg)
-	err := Alert(publisher, source, msg, args...)
+	err := Alert(publisher, serviceName, msg, args...)
 	if err != nil {
 		panic(err)
 	}
