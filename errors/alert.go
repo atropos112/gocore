@@ -94,9 +94,20 @@ func AlertWrapError(publisher pubsub.Publisher, err error) error {
 	return err
 }
 
-// AlertAndDie will take the error provided and if its not nil it will alert and panic.
-func AlertAndDie(publisher pubsub.Publisher, err error) {
+// AlertErrAndDie will take the error provided and if its not nil it will alert and panic.
+func AlertErrAndDie(publisher pubsub.Publisher, err error) {
 	assert.NotEmpty(err)
 
 	panic(AlertWrapError(publisher, err))
+}
+
+func AlertAndDie(publisher pubsub.Publisher, source, msg string, args ...any) {
+	assert.NotEmpty(source)
+	assert.NotEmpty(msg)
+	err := Alert(publisher, source, msg, args...)
+	if err != nil {
+		panic(err)
+	}
+
+	panic(msg)
 }
