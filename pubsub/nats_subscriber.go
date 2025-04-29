@@ -14,8 +14,8 @@ import (
 )
 
 type NATSSubscriber struct {
-	subscriber *nats.Subscriber
-	natsURL    string
+	Subscriber *nats.Subscriber
+	NatsURL    string
 	l          *slog.Logger
 }
 
@@ -23,7 +23,7 @@ type NATSSubscriber struct {
 var _ Subscriber = &NATSSubscriber{} //nolint:exhaustruct // Just to test we satistfy the interface
 
 func (s NATSSubscriber) Subscribe(topic string) (<-chan Event, error) {
-	msgChan, err := s.subscriber.Subscribe(context.Background(), topic)
+	msgChan, err := s.Subscriber.Subscribe(context.Background(), topic)
 	if err != nil {
 		return nil, err
 	}
@@ -107,8 +107,8 @@ func MakeNATSSubscriber(startTime time.Time) (*NATSSubscriber, error) {
 	}
 
 	natsSub := NATSSubscriber{
-		subscriber: subscriber,
-		natsURL:    natsURL,
+		Subscriber: subscriber,
+		NatsURL:    natsURL,
 		l:          slog.Default().With("nats_url", natsURL),
 	}
 

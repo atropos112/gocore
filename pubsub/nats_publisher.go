@@ -14,8 +14,8 @@ import (
 )
 
 type NATSPublisher struct {
-	publisher *nats.Publisher
-	natsURL   string
+	Publisher *nats.Publisher
+	NatsURL   string
 	l         *slog.Logger
 }
 
@@ -42,7 +42,7 @@ func (p *NATSPublisher) Publish(topic string, event types.Event, metadata *map[s
 		msg.Metadata["subject"] = event.Subject
 	}
 
-	if err := p.publisher.Publish(topic, msg); err != nil {
+	if err := p.Publisher.Publish(topic, msg); err != nil {
 		return err
 	}
 
@@ -99,8 +99,8 @@ func MakeNATSPublisher() (*NATSPublisher, error) {
 	}
 
 	natsPublisher := NATSPublisher{
-		publisher: publisher,
-		natsURL:   natsURL,
+		Publisher: publisher,
+		NatsURL:   natsURL,
 		l:         slog.Default().With("nats_url", natsURL),
 	}
 
